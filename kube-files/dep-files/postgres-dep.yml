@@ -3,33 +3,24 @@ apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: postgres
-  labels:
-    app: rails-kube-app
 spec:
   replicas: 1
-  selector: 
-    matchLabels:
-      app: rails-kube-app
-      tier: database
   template:
     metadata:
       name: postgres
       labels:
-        app: rails-kube-app
-        tier: database
+        app: rails
     spec:
       volumes:
-      - name: postgres-pv
-        persistentVolumeClaim:
-          claimName: postgres-pvc
+      - name: drkiq-postgres
       containers:
       - name: postgres
         image: postgres:9.4.5
         env:
         - name: POSTGRES_USER
-          valueFrom: drkiq
+          value: drkiq
         - name: POSTGRES_PASSWORD
-          valueFrom: yourpassword
+          value: yourpassword
         ports:
         - containerPort: 5432
         volumeMounts:
