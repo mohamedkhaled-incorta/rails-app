@@ -17,6 +17,13 @@ redis:
 
 drkiq:
   build: .
+  environment:
+      - SECRET_TOKEN=asecuretokenwouldnormallygohere
+      - WORKER_PROCESSES=1
+      - LISTEN_ON=0.0.0.0:8000
+      - DATABASE_URL=postgresql://drkiq:yourpassword@postgres:5432/drkiq?encoding=utf8&pool=5&timeout=5000
+      - CACHE_URL=redis://redis:6379/0
+      - JOB_WORKER_URL=redis://redis:6379/0
   links:
     - postgres
     - redis
@@ -24,16 +31,20 @@ drkiq:
     - .:/drkiq
   ports:
     - '8000:8000'
-  env_file:
-    - .drkiq.env
 
 sidekiq:
   build: .
+  environment:
+      - SECRET_TOKEN=asecuretokenwouldnormallygohere
+      - WORKER_PROCESSES=1
+      - LISTEN_ON=0.0.0.0:8000
+      - DATABASE_URL=postgresql://drkiq:yourpassword@postgres:5432/drkiq?encoding=utf8&pool=5&timeout=5000
+      - CACHE_URL=redis://redis:6379/0
+      - JOB_WORKER_URL=redis://redis:6379/0
   command: bundle exec sidekiq -C config/sidekiq.yml
   links:
     - postgres
     - redis
   volumes:
     - .:/drkiq
-  env_file:
-    - .drkiq.env
+
