@@ -1,30 +1,16 @@
----
-apiVersion: apps/v1beta2
-kind: Deployment
+apiVersion: batch/v1
+kind: Job
 metadata:
-  name: rails
+  name: setup
 spec:
-  replicas: 1
-  minReadySeconds: 5
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1  
-  selector:
-    matchLabels: 
-      app: rails
-      tier: app
   template:
     metadata:
-      name: rails
-      labels:
-        app: rails
-        tier: app
+      name: setup
     spec:
       containers:
-      - name: rails
+      - name: setup
         image: mohamedkhaled/rails-app:latest
+        args: ["rake db:restart && rake db:migrate"]
         env:
         - name: SECRET_TOKEN
           value: "asecuretokenwouldnormallygohere"
@@ -38,5 +24,4 @@ spec:
           value: "redis://redis:6379/0"
         - name: JOB_WORKER_URL
           value: "redis://redis:6379/0"
-        ports:
-          - containerPort: 8000
+      restartPolicy: Never
