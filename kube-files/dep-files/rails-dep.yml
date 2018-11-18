@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: rails
+spec:
+  replicas: 1
+  minReadySeconds: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1  
+  selector:
+    matchLabels: 
+      app: rails
+      tier: app
+  template:
+    metadata:
+      name: rails
+      labels:
+        app: rails
+        tier: app
+    spec:
+      containers:
+      - name: rails
+        image: mohamedkhaled/rail-app:latest
+        env:
+        - name: SECRET_TOKEN
+          value: "asecuretokenwouldnormallygohere"
+        - name: WORKER_PROCESSES
+          value: :1"
+        - name: LISTEN_ON
+          value: "0.0.0.0:8000"
+        - name: DATABASE_URL
+          value: "postgresql://drkiq:yourpassword@postgres:5432/drkiq?encoding=utf8&pool=5&timeout=5000"
+        - name: CACHE_URL
+          value: "redis://redis:6379/0"
+        - name: JOB_WORKER_URL
+          value: "redis://redis:6379/0"
+        ports:
+          - containerPort: 8000
