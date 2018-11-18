@@ -1,0 +1,26 @@
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: rails
+  template:
+    metadata:
+      name: redis
+      labels:
+        app: rails
+    spec:
+      volumes:
+      - name: drkiq-postgres
+      containers:
+      - name: redis
+        image: redis:3.0.5
+        ports:
+        - containerPort: 6379
+        volumeMounts:
+        - mountPath: "/var/lib/redis/data"
+          name: drkiq-postgres     
