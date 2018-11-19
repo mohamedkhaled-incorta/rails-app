@@ -2,7 +2,7 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: rails
+  name: drkiq
 spec:
   replicas: 1
   minReadySeconds: 5
@@ -17,13 +17,13 @@ spec:
       tier: app
   template:
     metadata:
-      name: rails
+      name: drkiq
       labels:
         app: rails
         tier: app
     spec:
       containers:
-      - name: rails
+      - name: drkiq
         image: mohamedkhaled/rails-app:latest
         env:
         - name: SECRET_TOKEN
