@@ -25,7 +25,8 @@ spec:
       containers:
       - name: sidekiq
         image: mohamedkhaled/rails-app:latest
-        command: "bundle exec sidekiq -C config/sidekiq.yml"
+        command: ["/bin/bash"]
+        args: ["-c","bundle exec sidekiq -C config/sidekiq.yml"]
         env:
         - name: SECRET_TOKEN
           value: "asecuretokenwouldnormallygohere"
