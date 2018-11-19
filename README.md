@@ -59,3 +59,18 @@ kubectl create -f kube-files/svc-files/rail-lb.yml
 ```bash
 kubectl create configmap rails-configmap --from-env-file=kube-files-configmaps/rail-configmap.yml
 ```
+
+## Deploy using configmaps 
+```bash
+kubectl create -f kube-files-configmaps/kube-volumes.yml
+kubectl create configmap rails-configmap --from-env-file=kube-files-configmaps/rail-configmap.yml
+kubectl create -f kube-files-configmaps/dep-files/postgres-dep.yml
+kubectl create -f kube-files-configmaps/svc-files/postgres-svc.yml
+kubectl create -f kube-files-configmaps/svc-files/redis-svc.yml
+kubectl create -f kube-files-configmaps/dep-files/redis-dep.yml
+kubectl create -f kube-files-configmaps/jobs/db-intialize.yml
+kubectl create -f kube-files-configmaps/dep-files/drkiq-dep.yml
+kubectl create -f kube-files-configmaps/svc-files/drkiq-svc.yml
+kubectl create -f kube-files-configmaps/dep-files/sidekiq-dep.yml
+kubectl create -f kube-files-configmaps/jobs/controller-job.yml
+```  
