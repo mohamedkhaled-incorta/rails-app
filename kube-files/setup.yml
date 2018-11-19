@@ -10,7 +10,8 @@ spec:
       containers:
       - name: setup
         image: mohamedkhaled/rails-app:latest
-        args: ["rake db:reset && rake db:migrate"]
+        command: ["/bin/sh"]
+        args: ["-c","rake db:reset && rake db:migrate"]
         env:
         - name: SECRET_TOKEN
           value: "asecuretokenwouldnormallygohere"
