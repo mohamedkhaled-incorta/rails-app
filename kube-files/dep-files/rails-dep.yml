@@ -17,7 +17,7 @@ spec:
       tier: app
   template:
     metadata:
-      name: rails
+      name: drkiq
       labels:
         app: rails
         tier: app
