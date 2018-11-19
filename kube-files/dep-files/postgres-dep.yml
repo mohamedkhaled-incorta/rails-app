@@ -29,9 +29,9 @@ spec:
         - name: POSTGRES_PASSWORD
           value: "yourpassword"
         - name: PGDATA
-          value: /var/lib/postgresql/data/db-files
+          value: /var/lib/postgresql/data
         ports:
         - containerPort: 5432
         volumeMounts:
-        - mountPath: "/var/lib/postgresql/data"
+        - mountPath: "/var/lib/postgresql"
           name: drkiq-postgres
