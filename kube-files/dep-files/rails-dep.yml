@@ -25,7 +25,6 @@ spec:
       containers:
       - name: rails
         image: mohamedkhaled/rails-app:latest
-        args: ["/bin/bash -c $@"]
         env:
         - name: SECRET_TOKEN
           value: "asecuretokenwouldnormallygohere"
