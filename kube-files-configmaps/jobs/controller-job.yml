@@ -14,15 +14,33 @@ spec:
         args: ["-c","rails g controller Pages home"]
         env:
         - name: SECRET_TOKEN
-          value: "asecuretokenwouldnormallygohere"
+          valueFrom:
+            configMapKeyRef:
+             name: rails-configmap
+             key: SECRET_TOKEN
         - name: WORKER_PROCESSES
-          value: "1"
+          valueFrom:
+            configMapKeyRef:
+             name: rails-configmap
+             key: WORKER_PROCESSES
         - name: LISTEN_ON
-          value: "0.0.0.0:8000"
+          valueFrom:
+            configMapKeyRef:
+             name: rails-configmap
+             key: LISTEN_ON
         - name: DATABASE_URL
-          value: "postgresql://drkiq:yourpassword@postgres:5432/drkiq?encoding=utf8&pool=5&timeout=5000"
+          valueFrom:
+            configMapKeyRef:
+             name: rails-configmap
+             key: DATABASE_URL
         - name: CACHE_URL
-          value: "redis://redis:6379/0"
+          valueFrom:
+            configMapKeyRef:
+             name: rails-configmap
+             key: CACHE_URL
         - name: JOB_WORKER_URL
-          value: "redis://redis:6379/0"
+          valueFrom:
+            configMapKeyRef:
+             name: rails-configmap
+             key: JOB_WORKER_URL
       restartPolicy: Never
