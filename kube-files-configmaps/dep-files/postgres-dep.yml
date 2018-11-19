@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: rails
+      tier: database
+  template:
+    metadata:
+      name: postgres
+      labels:
+        app: rails
+        tier: database
+    spec:
+      volumes:
+      - name: drkiq-postgres
+        persistentVolumeClaim:
+          claimName: drkiq-postgres-claim 
+      containers:
+      - name: postgres
+        image: postgres:9.4.5
+        env:
+        - name: POSTGRES_USER
+          value: "drkiq"
+        - name: POSTGRES_PASSWORD
+          value: "yourpassword"
+        - name: PGDATA
+          value: /var/lib/postgresql/data
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+        - mountPath: "/var/lib/postgresql"
+          name: drkiq-postgres

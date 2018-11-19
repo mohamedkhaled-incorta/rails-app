@@ -1,0 +1,62 @@
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: drkiq
+spec:
+  replicas: 1
+  minReadySeconds: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1  
+  selector:
+    matchLabels: 
+      app: rails
+      tier: app
+      lb: rail-lb
+  template:
+    metadata:
+      name: drkiq
+      labels:
+        app: rails
+        tier: app
+        lb: rail-lb
+    spec:
+      containers:
+      - name: drkiq
+        image: mohamedkhaled/rails-app:latest
+        env:
+        - name: SECRET_TOKEN
+          valueFrom:
+            configMapKeyRef:
+             name: rails-configmap
+             key: SECRET_TOKEN
+        - name: WORKER_PROCESSES
+          valueFrom:
+            configMapKeyRef:
+             name: rails-configmap
+             key: WORKER_PROCESSES
+        - name: LISTEN_ON
+          valueFrom:
+            configMapKeyRef:
+             name: rails-configmap
+             key: LISTEN_ON
+        - name: DATABASE_URL
+          valueFrom:
+            configMapKeyRef:
+             name: rails-configmap
+             key: DATABASE_URL
+        - name: CACHE_URL
+          valueFrom:
+            configMapKeyRef:
+             name: rails-configmap
+             key: CACHE_URL
+        - name: JOB_WORKER_URL
+          valueFrom:
+            configMapKeyRef:
+             name: rails-configmap
+             key: JOB_WORKER_URL
+        ports:
+          - containerPort: 8000

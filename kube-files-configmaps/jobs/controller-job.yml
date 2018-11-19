@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: controller-job
+spec:
+  template:
+    metadata:
+      name: controller-job
+    spec:
+      containers:
+      - name: controller-job
+        image: mohamedkhaled/rails-app:latest
+        command: ["/bin/sh"]
+        args: ["-c","rails g controller Pages home"]
+        env:
+        - name: SECRET_TOKEN
+          value: "asecuretokenwouldnormallygohere"
+        - name: WORKER_PROCESSES
+          value: "1"
+        - name: LISTEN_ON
+          value: "0.0.0.0:8000"
+        - name: DATABASE_URL
+          value: "postgresql://drkiq:yourpassword@postgres:5432/drkiq?encoding=utf8&pool=5&timeout=5000"
+        - name: CACHE_URL
+          value: "redis://redis:6379/0"
+        - name: JOB_WORKER_URL
+          value: "redis://redis:6379/0"
+      restartPolicy: Never

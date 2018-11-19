@@ -54,3 +54,8 @@ kubectl create -f kube-files/jobs/controller-job.yml
 ```bash
 kubectl create -f kube-files/svc-files/rail-lb.yml
 ```
+
+## Create ConfigMaps   
+```bash
+kubectl create configmap rails-configmap --from-env-file=kube-files-configmaps/rail-configmap.yml
+```
