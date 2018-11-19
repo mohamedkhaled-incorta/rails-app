@@ -49,3 +49,8 @@ kubectl create -f kube-files/dep-files/sidekiq-dep.yml
 ```bash
 kubectl create -f kube-files/jobs/controller-job.yml
 ```
+
+## Expose drkiq Deployment to external IP using LB   
+```bash
+kubectl create -f kube-files/svc-files/rail-lb.yml
+```
