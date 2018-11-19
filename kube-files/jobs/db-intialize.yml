@@ -1,14 +1,14 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: setup
+  name: db-intialize
 spec:
   template:
     metadata:
-      name: setup
+      name: db-intialize
     spec:
       containers:
-      - name: setup
+      - name: db-intialize
         image: mohamedkhaled/rails-app:latest
         command: ["/bin/sh"]
         args: ["-c","rake db:reset && rake db:migrate"]
