@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rail-svc-external
+spec:
+  type: LoadBalancer
+  selector:
+    app: rails
+    lb: rail-lb
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8000

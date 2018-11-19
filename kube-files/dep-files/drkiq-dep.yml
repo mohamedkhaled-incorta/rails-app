@@ -15,12 +15,14 @@ spec:
     matchLabels: 
       app: rails
       tier: app
+      lb: rail-lb
   template:
     metadata:
       name: drkiq
       labels:
         app: rails
         tier: app
+        lb: rail-lb
     spec:
       containers:
       - name: drkiq
