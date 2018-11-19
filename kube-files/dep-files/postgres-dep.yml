@@ -8,14 +8,18 @@ spec:
   selector: 
     matchLabels:
       app: rails
+      tier: database
   template:
     metadata:
       name: postgres
       labels:
         app: rails
+        tier: database
     spec:
       volumes:
       - name: drkiq-postgres
+        persistentVolumeClaim:
+          claimName: drkiq-postgres-claim 
       containers:
       - name: postgres
         image: postgres:9.4.5

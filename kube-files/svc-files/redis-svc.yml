@@ -11,4 +11,4 @@ spec:
 
   selector:
     app: rails
-    tier: cache
+    tier: app

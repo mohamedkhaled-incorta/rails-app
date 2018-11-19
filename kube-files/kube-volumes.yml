@@ -12,8 +12,22 @@ spec:
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: "/mnt/data"
+    path: "/tmp/data"
+
 ---
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: drkiq-postgres-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+
 kind: PersistentVolume
 apiVersion: v1
 metadata:
@@ -28,4 +42,16 @@ spec:
   capacity:
    storage: 5Gi
   hostPath:
-    path: "/mnt/data"
+    path: "/tmp/data"
+---
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pdrkiq-redis-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi

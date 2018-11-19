@@ -8,14 +8,18 @@ spec:
   selector: 
     matchLabels:
       app: rails
+      tier: app
   template:
     metadata:
       name: redis
       labels:
         app: rails
+        tier: app
     spec:
       volumes:
-      - name: drkiq-postgres
+      - name: pdrkiq-redis
+        persistentVolumeClaim:
+          claimName: pdrkiq-redis-claim
       containers:
       - name: redis
         image: redis:3.0.5
@@ -23,4 +27,4 @@ spec:
         - containerPort: 6379
         volumeMounts:
         - mountPath: "/var/lib/redis/data"
-          name: drkiq-postgres     
+          name: pdrkiq-redis   
