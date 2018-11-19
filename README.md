@@ -32,7 +32,7 @@ kubectl create -f kube-files/svc-files/redis-svc.yml
 ## Intialize Postgres DB
 
 ```bash
-kubectl create -f kube-files/setup.yml
+kubectl create -f kube-files/jobs/db-intialize.yml
 ```
 ## Drkiq
 Deploy Drkiq App
