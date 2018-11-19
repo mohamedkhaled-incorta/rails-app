@@ -42,5 +42,5 @@ kubectl create -f kube-files/svc-files/drkiq-svc.yml
 ```
 ## Sidekiq
 ```bash
-kubectl create -f kube-files/svc-files/sidekiq-dep.yml
+kubectl create -f kube-files/dep-files/sidekiq-dep.yml
 ```
