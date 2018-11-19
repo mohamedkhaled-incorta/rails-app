@@ -44,3 +44,8 @@ kubectl create -f kube-files/svc-files/drkiq-svc.yml
 ```bash
 kubectl create -f kube-files/dep-files/sidekiq-dep.yml
 ```
+
+## Submit controller job 
+```bash
+kubectl create -f kube-files/jobs/controller-job.yml
+```
